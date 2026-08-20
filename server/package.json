@@ -1,0 +1,26 @@
+{
+  "name": "qr-attendance-server",
+  "version": "1.0.0",
+  "description": "Backend API for QR Attendance System",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js"
+  },
+  "keywords": [
+    "qr",
+    "attendance",
+    "express",
+    "sqlite"
+  ],
+  "author": "Deborah Okon",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "html5-qrcode": "^2.3.8",
+    "qrcode": "^1.5.4"
+  }
+}

@@ -1,0 +1,992 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  color: #1f2937;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* ============================= */
+/* APP LAYOUT */
+/* ============================= */
+
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+}
+
+/* ============================= */
+/* SIDEBAR */
+/* ============================= */
+
+.sidebar {
+  width: 250px;
+  min-height: 100vh;
+  background: #111827;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.sidebar-logo {
+  padding: 25px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #374151;
+}
+
+.logo-icon {
+  width: 45px;
+  height: 45px;
+  background: #2563eb;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.sidebar-logo h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.sidebar-logo span {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.navigation {
+  padding: 20px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nav-item {
+  width: 100%;
+  margin: 0;
+  padding: 13px 15px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: #d1d5db;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-item:hover {
+  background: #1f2937;
+  color: white;
+}
+
+.nav-item.active {
+  background: #2563eb;
+  color: white;
+}
+
+.nav-item span {
+  width: 22px;
+  text-align: center;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 20px;
+  border-top: 1px solid #374151;
+  color: #9ca3af;
+}
+
+.sidebar-footer p {
+  margin: 0 0 5px;
+  font-size: 12px;
+}
+
+.sidebar-footer small {
+  font-size: 10px;
+}
+
+/* ============================= */
+/* MAIN AREA */
+/* ============================= */
+
+.main-area {
+  margin-left: 250px;
+  width: calc(100% - 250px);
+  min-height: 100vh;
+}
+
+.topbar {
+  background: white;
+  padding: 22px 30px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.topbar p {
+  margin: 5px 0 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.content {
+  padding: 30px;
+}
+
+/* ============================= */
+/* PAGE CONTENT */
+/* ============================= */
+
+.page-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+.single-page {
+  display: block;
+}
+
+/* ============================= */
+/* CARDS */
+/* ============================= */
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.card h2 {
+  margin-top: 0;
+  color: #1f2937;
+}
+
+/* ============================= */
+/* FORMS */
+/* ============================= */
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 15px;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+input {
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+/* ============================= */
+/* BUTTONS */
+/* ============================= */
+
+button {
+  margin-top: 25px;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background: #2563eb;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+.nav-item {
+  margin-top: 0;
+}
+
+/* ============================= */
+/* HEADER BUTTONS */
+/* ============================= */
+
+.header-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.header-buttons button {
+  margin-top: 0;
+  width: auto;
+}
+
+.export-button {
+  background: #16a34a;
+}
+
+.export-button:hover {
+  background: #15803d;
+}
+
+/* ============================= */
+/* MESSAGES */
+/* ============================= */
+
+.success {
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  background: #dcfce7;
+  color: #166534;
+}
+
+.error {
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* ============================= */
+/* QR CODE */
+/* ============================= */
+
+.student-info {
+  margin-bottom: 20px;
+}
+
+.student-info p {
+  margin: 8px 0;
+}
+
+.qr-code {
+  width: 250px;
+  height: 250px;
+  display: block;
+  margin: 20px auto;
+}
+
+.qr-message {
+  text-align: center;
+  color: #555;
+}
+
+/* ============================= */
+/* QR SCANNER */
+/* ============================= */
+
+.scanner-container {
+  width: 100%;
+  max-width: 550px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Main scanner box */
+#reader {
+  width: 100% !important;
+  max-width: 500px !important;
+  margin: 20px auto !important;
+  padding: 0 !important;
+  border: none !important;
+  text-align: center !important;
+}
+
+/* Camera scan region */
+#reader__scan_region {
+  width: 100% !important;
+  max-width: 500px !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  border-radius: 12px !important;
+}
+
+/* Camera video */
+#reader video {
+  display: block !important;
+  width: 100% !important;
+  max-width: 500px !important;
+  height: auto !important;
+  margin: 0 auto !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  border-radius: 12px !important;
+}
+
+/* Scanner dashboard */
+#reader__dashboard {
+  width: 100% !important;
+  max-width: 500px !important;
+  margin: 15px auto 0 !important;
+  text-align: center !important;
+}
+
+/* Scanner dashboard sections */
+#reader__dashboard_section {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Scanner buttons */
+#reader button {
+  width: auto !important;
+  min-width: 150px;
+  margin: 10px auto !important;
+}
+
+/* Camera selection dropdown */
+#reader select {
+  max-width: 100%;
+  padding: 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+}
+
+/* QR scanner shaded region */
+#reader__scan_region img {
+  display: block;
+  margin: 0 auto;
+}
+
+/* ============================= */
+/* DASHBOARD */
+/* ============================= */
+
+.dashboard {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.dashboard-header h2 {
+  margin: 0;
+}
+
+.dashboard-header p {
+  margin: 5px 0 0;
+  color: #6b7280;
+}
+
+.refresh-button {
+  margin-top: 0;
+  width: auto;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.stat-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.stat-icon {
+  font-size: 30px;
+}
+
+.stat-card p {
+  margin: 0 0 5px;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.stat-card h3 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.recent-attendance {
+  margin-top: 20px;
+}
+
+/* Loading */
+.loading-card {
+  text-align: center;
+  padding: 40px;
+}
+
+.loading-card p {
+  color: #6b7280;
+}
+
+/* ============================= */
+/* SEARCH */
+/* ============================= */
+
+.search-container {
+  margin-bottom: 20px;
+}
+
+.search-container input {
+  width: 100%;
+  max-width: 500px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6b7280;
+}
+
+/* ============================= */
+/* ATTENDANCE FILTERS */
+/* ============================= */
+
+.attendance-filters {
+  display: flex;
+  align-items: flex-end;
+  gap: 15px;
+  margin-bottom: 25px;
+  padding: 18px;
+  background: #f9fafb;
+  border-radius: 8px;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.filter-group label {
+  margin: 0 0 6px;
+  font-size: 13px;
+}
+
+.filter-group input {
+  width: 100%;
+}
+
+.clear-filter {
+  margin-top: 0;
+  background: #6b7280;
+  white-space: nowrap;
+}
+
+.clear-filter:hover {
+  background: #4b5563;
+}
+
+/* ============================= */
+/* TABLES */
+/* ============================= */
+
+.full-width {
+  width: 100%;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.section-header h2 {
+  margin: 0;
+}
+
+.section-header button {
+  margin-top: 0;
+  width: auto;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+  background: #f3f4f6;
+  font-weight: bold;
+}
+
+tr:hover {
+  background: #f9fafb;
+}
+
+/* ============================= */
+/* MOBILE */
+/* ============================= */
+
+@media (max-width: 800px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  .main-area {
+    margin-left: 200px;
+    width: calc(100% - 200px);
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .page-content {
+    grid-template-columns: 1fr;
+  }
+
+  .scanner-container {
+    max-width: 100%;
+  }
+
+  #reader {
+    max-width: 100% !important;
+  }
+
+  #reader__scan_region {
+    max-width: 100% !important;
+  }
+
+  #reader video {
+    max-width: 100% !important;
+  }
+}
+
+/* ============================= */
+/* MOBILE SMALL SCREENS */
+/* ============================= */
+
+@media (max-width: 600px) {
+  .sidebar {
+    position: static;
+    width: 100%;
+    min-height: auto;
+  }
+
+  .app-layout {
+    display: block;
+  }
+
+  .main-area {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .navigation {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .nav-item {
+    min-width: 130px;
+    justify-content: center;
+  }
+
+  .sidebar-footer {
+    display: none;
+  }
+
+  .content {
+    padding: 15px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar {
+    padding: 18px;
+  }
+
+  .scanner-container {
+    width: 100%;
+    margin: 15px auto;
+  }
+
+  #reader {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  #reader__scan_region {
+    width: 100% !important;
+  }
+
+  #reader video {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 10px !important;
+  }
+
+  .qr-modal-content {
+    padding: 25px 15px;
+  }
+
+  .large-qr-code {
+    width: 220px;
+    height: 220px;
+  }
+
+  .qr-actions {
+    flex-direction: column;
+  }
+
+  .qr-actions button {
+    width: 100%;
+  }
+}
+
+/* ============================= */
+/* QR PRINT */
+/* ============================= */
+
+.qr-print-area {
+  text-align: center;
+}
+
+.qr-student-details {
+  margin: 15px 0;
+}
+
+.qr-student-details h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+}
+
+.qr-student-details p {
+  margin: 5px 0;
+}
+
+.print-qr-button {
+  display: block;
+  width: 100%;
+  max-width: 250px;
+  margin: 20px auto 10px;
+  background: #16a34a;
+}
+
+.print-qr-button:hover {
+  background: #15803d;
+}
+
+/* ============================= */
+/* STUDENT QR CODE */
+/* ============================= */
+
+.view-qr-button {
+  margin-top: 0;
+  padding: 8px 14px;
+  width: auto;
+  background: #2563eb;
+  font-size: 14px;
+}
+
+.view-qr-button:hover {
+  background: #1d4ed8;
+}
+
+/* ============================= */
+/* QR CODE MODAL */
+/* ============================= */
+
+.qr-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(0, 0, 0, 0.65);
+
+  overflow-y: auto;
+}
+
+.qr-modal-content {
+  position: relative;
+
+  width: 100%;
+  max-width: 620px;
+
+  max-height: calc(100vh - 40px);
+
+  padding: 30px;
+
+  background: #ffffff;
+  border-radius: 12px;
+
+  text-align: center;
+
+  overflow-y: auto;
+
+  box-sizing: border-box;
+}
+
+/* Modal heading */
+
+.qr-modal-content h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+/* Student information */
+
+.student-qr-info {
+  margin-bottom: 20px;
+}
+
+.student-qr-info h3 {
+  margin: 0 0 10px;
+  font-size: 24px;
+}
+
+.student-qr-info p {
+  margin: 8px 0;
+  font-size: 18px;
+}
+
+/* QR Code */
+
+.large-qr-code {
+  display: block;
+
+  width: 180px;
+  height: 180px;
+
+  max-width: 100%;
+  margin: 15px auto;
+
+  object-fit: contain;
+}
+
+/* Instruction */
+
+.qr-instruction {
+  margin: 15px 0 20px;
+
+  font-size: 16px;
+  color: #6b7280;
+}
+
+/* Buttons */
+
+.qr-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+
+  margin-top: 20px;
+
+  padding-top: 10px;
+}
+
+/* Print button */
+
+.print-qr-button {
+  padding: 12px 20px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #16a34a;
+  color: white;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.print-qr-button:hover {
+  background: #15803d;
+}
+
+/* Close button */
+
+.cancel-button {
+  padding: 12px 20px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #6b7280;
+  color: white;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.cancel-button:hover {
+  background: #4b5563;
+}
+
+/* X button */
+
+.close-modal {
+  position: absolute;
+
+  top: 12px;
+  right: 15px;
+
+  width: 35px;
+  height: 35px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: #6b7280;
+
+  font-size: 28px;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+.close-modal:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+/* ============================= */
+/* QR ACTION BUTTONS */
+/* ============================= */
+
+.qr-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+
+  margin-top: 20px;
+}
+
+.qr-actions button {
+  margin-top: 0;
+  width: auto;
+}
+
+.print-qr-button {
+  background: #16a34a;
+}
+
+.print-qr-button:hover {
+  background: #15803d;
+}
+
+.cancel-button {
+  background: #6b7280;
+}
+
+.cancel-button:hover {
+  background: #4b5563;
+}
+
+/* ============================= */
+/* PRINT QR CODE */
+/* ============================= */
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .qr-print-area,
+  .qr-print-area * {
+    visibility: visible;
+  }
+
+  .qr-print-area {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+
+    padding: 40px;
+  }
+
+  .print-qr-button,
+  .qr-message,
+  .close-modal,
+  .qr-actions {
+    display: none !important;
+  }
+
+  .qr-code {
+    width: 300px;
+    height: 300px;
+
+    margin: 30px auto;
+  }
+
+  .qr-student-details {
+    margin-top: 20px;
+  }
+}
