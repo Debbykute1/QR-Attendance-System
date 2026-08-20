@@ -25,18 +25,24 @@ app.get("/", (req, res) => {
   });
 });
 
-// Database test route
-app.get("/api/database-test", (req, res) => {
+// PostgreSQL database test route
+app.get("/api/database-test", async (req, res) => {
   try {
-    const result = db
-      .prepare("SELECT name FROM sqlite_master WHERE type='table'")
-      .all();
+    const result = await db.query(`
+      SELECT table_name
+      FROM information_schema.tables
+      WHERE table_schema = 'public'
+      AND table_name IN ('students', 'attendance')
+      ORDER BY table_name
+    `);
 
     res.json({
       message: "Database connection successful",
-      tables: result,
+      tables: result.rows,
     });
   } catch (error) {
+    console.error("Database test error:", error);
+
     res.status(500).json({
       message: "Database connection failed",
       error: error.message,

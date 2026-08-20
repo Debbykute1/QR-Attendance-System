@@ -19,11 +19,12 @@ router.post("/", async (req, res) => {
     }
 
     // Check if student already exists
-    const existingStudent = db
-      .prepare("SELECT * FROM students WHERE student_id = ?")
-      .get(student_id);
+    const existingStudent = await db.query(
+      "SELECT * FROM students WHERE student_id = $1",
+      [student_id]
+    );
 
-    if (existingStudent) {
+    if (existingStudent.rows.length > 0) {
       return res.status(409).json({
         message: "Student already exists",
       });
@@ -39,32 +40,27 @@ router.post("/", async (req, res) => {
     const qrCode = await QRCode.toDataURL(qrData);
 
     // Save student
-    const statement = db.prepare(`
+    const result = await db.query(
+      `
       INSERT INTO students
       (student_id, name, email, department, qr_code)
-      VALUES (?, ?, ?, ?, ?)
-    `);
-
-    const result = statement.run(
-      student_id,
-      name,
-      email || null,
-      department || null,
-      qrCode
-    );
-
-    // Return newly created student
-    res.status(201).json({
-      message: "Student registered successfully",
-
-      student: {
-        id: result.lastInsertRowid,
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING id, student_id, name, email, department, qr_code
+      `,
+      [
         student_id,
         name,
-        email: email || null,
-        department: department || null,
-        qr_code: qrCode,
-      },
+        email || null,
+        department || null,
+        qrCode,
+      ]
+    );
+
+    const student = result.rows[0];
+
+    res.status(201).json({
+      message: "Student registered successfully",
+      student,
     });
   } catch (error) {
     console.error("Register student error:", error);
@@ -81,20 +77,20 @@ router.post("/", async (req, res) => {
 // ==========================================
 router.get("/", async (req, res) => {
   try {
-    const students = db
-      .prepare(`
-        SELECT
-          id,
-          student_id,
-          name,
-          email,
-          department,
-          qr_code,
-          created_at
-        FROM students
-        ORDER BY id DESC
-      `)
-      .all();
+    const result = await db.query(`
+      SELECT
+        id,
+        student_id,
+        name,
+        email,
+        department,
+        qr_code,
+        created_at
+      FROM students
+      ORDER BY id DESC
+    `);
+
+    const students = result.rows;
 
     // ==========================================
     // Generate QR codes for old students
@@ -109,14 +105,15 @@ router.get("/", async (req, res) => {
 
         const qrCode = await QRCode.toDataURL(qrData);
 
-        // Save generated QR code to database
-        db.prepare(`
+        await db.query(
+          `
           UPDATE students
-          SET qr_code = ?
-          WHERE id = ?
-        `).run(qrCode, student.id);
+          SET qr_code = $1
+          WHERE id = $2
+          `,
+          [qrCode, student.id]
+        );
 
-        // Add QR code to response
         student.qr_code = qrCode;
       }
     }
@@ -137,26 +134,29 @@ router.get("/", async (req, res) => {
 // ==========================================
 router.get("/:student_id", async (req, res) => {
   try {
-    const student = db
-      .prepare(`
-        SELECT
-          id,
-          student_id,
-          name,
-          email,
-          department,
-          qr_code,
-          created_at
-        FROM students
-        WHERE student_id = ?
-      `)
-      .get(req.params.student_id);
+    const result = await db.query(
+      `
+      SELECT
+        id,
+        student_id,
+        name,
+        email,
+        department,
+        qr_code,
+        created_at
+      FROM students
+      WHERE student_id = $1
+      `,
+      [req.params.student_id]
+    );
 
-    if (!student) {
+    if (result.rows.length === 0) {
       return res.status(404).json({
         message: "Student not found",
       });
     }
+
+    const student = result.rows[0];
 
     // ==========================================
     // Generate QR code if missing
@@ -169,11 +169,14 @@ router.get("/:student_id", async (req, res) => {
 
       const qrCode = await QRCode.toDataURL(qrData);
 
-      db.prepare(`
+      await db.query(
+        `
         UPDATE students
-        SET qr_code = ?
-        WHERE id = ?
-      `).run(qrCode, student.id);
+        SET qr_code = $1
+        WHERE id = $2
+        `,
+        [qrCode, student.id]
+      );
 
       student.qr_code = qrCode;
     }
